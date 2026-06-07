@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rithanya Balasubramani | Portfolio</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --accent: #0ea5e9;
+    --accent-light: #e0f2fe;
+    --text: #1e293b;
+    --muted: #64748b;
+    --bg: #ffffff;
+    --card: #f8fafc;
+    --border: #e2e8f0;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', sans-serif; color: var(--text); background: var(--bg); }
+
+  nav {
+    position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+    z-index: 100; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.9rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  section { padding: 5rem 2rem; max-width: 860px; margin: 0 auto; }
+
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 6rem; }
+  .hero-tag {
+    display: inline-block; background: var(--accent-light); color: var(--accent);
+    font-size: 0.8rem; font-weight: 600; padding: 0.3rem 0.8rem;
+    border-radius: 999px; margin-bottom: 1.2rem; letter-spacing: 0.05em;
+  }
+  #hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; margin-bottom: 1rem; }
+  #hero h1 span { color: var(--accent); }
+  #hero p { color: var(--muted); font-size: 1.1rem; max-width: 560px; line-height: 1.7; margin-bottom: 2rem; }
+  .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.65rem 1.4rem; border-radius: 8px; font-size: 0.95rem;
+    font-weight: 600; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #0284c7; }
+  .btn-outline { border: 1.5px solid var(--accent); color: var(--accent); background: transparent; }
+  .btn-outline:hover { background: var(--accent-light); }
+
+  .section-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .section-line { width: 40px; height: 3px; background: var(--accent); border-radius: 2px; margin-bottom: 2rem; }
+
+  #about p { color: var(--muted); line-height: 1.8; font-size: 1rem; }
+
+  .edu-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.4rem 1.6rem; margin-bottom: 1rem;
+  }
+  .edu-card h3 { font-size: 1rem; font-weight: 700; }
+  .edu-card .inst { color: var(--accent); font-size: 0.9rem; margin: 0.2rem 0; }
+  .edu-card .meta { color: var(--muted); font-size: 0.85rem; }
+
+  .skills-section { margin-bottom: 1.4rem; }
+  .skills-section h4 { font-size: 0.85rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.6rem; }
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .skill-tag {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.85rem;
+    color: var(--text); font-weight: 500;
+  }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+  .proj-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.4rem; transition: box-shadow 0.2s;
+  }
+  .proj-card:hover { box-shadow: 0 4px 20px rgba(14,165,233,0.12); }
+  .proj-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .proj-card ul { color: var(--muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 0.8rem; padding-left: 1.1rem; }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .proj-tag {
+    background: var(--accent-light); color: var(--accent);
+    font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600;
+  }
+  .proj-badge {
+    display: inline-block; font-size: 0.72rem; background: #fef9c3; color: #854d0e;
+    border-radius: 999px; padding: 0.15rem 0.55rem; font-weight: 600; margin-bottom: 0.5rem;
+  }
+
+  .cert-list { display: flex; flex-direction: column; gap: 0.8rem; }
+  .cert-item {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.9rem 1.2rem;
+  }
+  .cert-icon { font-size: 1.4rem; }
+  .cert-item h4 { font-size: 0.95rem; font-weight: 600; }
+  .cert-item p { font-size: 0.82rem; color: var(--muted); }
+
+  .achieve-list { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
+  .achieve-item {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.9rem 1.2rem; font-size: 0.92rem; color: var(--text);
+  }
+  .achieve-item span { font-size: 1.1rem; }
+
+  .lead-list { display: flex; flex-direction: column; gap: 0.8rem; }
+  .lead-item {
+    border-left: 3px solid var(--accent); padding: 0.6rem 1rem;
+    background: var(--card); border-radius: 0 8px 8px 0;
+  }
+  .lead-item h4 { font-size: 0.95rem; font-weight: 700; }
+  .lead-item p { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+
+  .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.7rem 1.2rem;
+    text-decoration: none; color: var(--text); font-size: 0.9rem; transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+  .contact-form { display: flex; flex-direction: column; gap: 0.8rem; }
+  .contact-form input, .contact-form textarea {
+    padding: 0.75rem 1rem; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 0.95rem; font-family: inherit;
+    outline: none; transition: border 0.2s; background: var(--card);
+  }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+  .contact-form textarea { resize: vertical; min-height: 120px; }
+
+  footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem; }
+    .nav-links { gap: 1rem; }
+    section { padding: 4rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Rithanya B.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certificates">Certs</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <span class="hero-tag">Open to Software Roles 🚀</span>
+  <h1>Hi, I'm <span>Rithanya Balasubramani</span><br/>Biomedical Engineer<br/>turned Software Developer.</h1>
+  <p>Final year BME student blending healthcare knowledge with a passion for software — building tech solutions that are meaningful, practical, and impactful.</p>
+  <div class="btn-row">
+    <a href="#projects" class="btn btn-primary">View My Work</a>
+    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-title">About Me</div>
+  <div class="section-line"></div>
+  <p>
+    I'm Rithanya, a Biomedical Engineering student at KPR Institute of Engineering and Technology, Coimbatore,
+    with a growing passion for software development. My engineering foundation gives me strong analytical thinking,
+    while my hands-on experience in Python, Java, web technologies, and design tools fuels my drive to build
+    real-world software solutions. I'm actively seeking software roles where I can bridge the worlds of healthcare
+    and technology. Outside of tech, I love design, creative projects, and leading communities.
+  </p>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-title">Education</div>
+  <div class="section-line"></div>
+  <div class="edu-card">
+    <h3>B.E. in Biomedical Engineering</h3>
+    <div class="inst">KPR Institute of Engineering and Technology, Coimbatore</div>
+    <div class="meta">2023 – 2027 &nbsp;|&nbsp; CGPA: 7.64 / 10</div>
+  </div>
+  <div class="edu-card">
+    <h3>Higher Secondary Education (HSC)</h3>
+    <div class="inst">Adharsh Vidhyalaya Matric HSS, Tirupur</div>
+    <div class="meta">2023 &nbsp;|&nbsp; 81.16%</div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-title">Skills</div>
+  <div class="section-line"></div>
+
+  <div class="skills-section">
+    <h4>Programming</h4>
+    <div class="skills-grid">
+      <span class="skill-tag">Java</span>
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">C</span>
+    </div>
+  </div>
+
+  <div class="skills-section">
+    <h4>Web Technologies</h4>
+    <div class="skills-grid">
+      <span class="skill-tag">HTML</span>
+      <span class="skill-tag">CSS</span>
+      <span class="skill-tag">JavaScript</span>
+      <span class="skill-tag">SQL</span>
+    </div>
+  </div>
+
+  <div class="skills-section">
+    <h4>Design Tools</h4>
+    <div class="skills-grid">
+      <span class="skill-tag">Adobe Illustrator</span>
+      <span class="skill-tag">Photoshop</span>
+      <span class="skill-tag">Figma</span>
+      <span class="skill-tag">Canva</span>
+    </div>
+  </div>
+
+  <div class="skills-section">
+    <h4>Developer Tools & Others</h4>
+    <div class="skills-grid">
+      <span class="skill-tag">VS Code</span>
+      <span class="skill-tag">MS Office</span>
+      <span class="skill-tag">Git & GitHub</span>
+    </div>
+  </div>
+
+  <div class="skills-section">
+    <h4>Languages</h4>
+    <div class="skills-grid">
+      <span class="skill-tag">Tamil</span>
+      <span class="skill-tag">English</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-title">Projects</div>
+  <div class="section-line"></div>
+  <div class="projects-grid">
+    <div class="proj-card">
+      <h3>Smart Patient Monitoring System</h3>
+      <ul>
+        <li>Real-time monitoring system for continuous tracking of vital signs.</li>
+        <li>Measured heart rate, temperature & SpO2 with automated abnormal-value alerts.</li>
+      </ul>
+      <div class="proj-tags">
+        <span class="proj-tag">Raspberry Pi</span>
+        <span class="proj-tag">Biomedical Sensors</span>
+      </div>
+    </div>
+    <div class="proj-card">
+      <h3>Smart Preventive Alert System for Medical Devices</h3>
+      <ul>
+        <li>Alert mechanism to identify anomalies before device failure.</li>
+        <li>Enabled preventive maintenance notifications to improve device safety.</li>
+      </ul>
+      <div class="proj-tags">
+        <span class="proj-tag">Raspberry Pi</span>
+        <span class="proj-tag">Sensors</span>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-badge">🔄 Ongoing</div>
+      <h3>Parkinson's Disease Detection via Voice Analysis</h3>
+      <ul>
+        <li>ML tool to detect Parkinson's using acoustic biomarkers.</li>
+        <li>Integrating classifiers and a web interface for accessibility.</li>
+      </ul>
+      <div class="proj-tags">
+        <span class="proj-tag">Python</span>
+        <span class="proj-tag">Machine Learning</span>
+        <span class="proj-tag">Web Interface</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <div class="section-title">Certifications</div>
+  <div class="section-line"></div>
+  <div class="cert-list">
+    <div class="cert-item">
+      <div class="cert-icon">⭐</div>
+      <div>
+        <h4>Java – 4 Star Rating</h4>
+        <p>HackerRank</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <h4>Python Basics</h4>
+        <p>Simplilearn &nbsp;|&nbsp; Completed</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="section-title">Leadership & Achievements</div>
+  <div class="section-line"></div>
+
+  <div class="lead-list" style="margin-bottom:2rem">
+    <div class="lead-item">
+      <h4>President – Design Club</h4>
+      <p>KPR Institute &nbsp;|&nbsp; 2025–2026 &nbsp;|&nbsp; Led creative initiatives and organized workshops across departments.</p>
+    </div>
+    <div class="lead-item">
+      <h4>Joint Treasurer – Ignitrron (Tech Club House)</h4>
+      <p>KPR Institute &nbsp;|&nbsp; 2025–2026 &nbsp;|&nbsp; Managed budgets and coordinated technical events and activities.</p>
+    </div>
+  </div>
+
+  <div class="achieve-list">
+    <div class="achieve-item">
+      <span>🏆</span>
+      Represented college at <strong>INNOVSENSE</strong>, presenting an innovative biomedical project.
+    </div>
+    <div class="achieve-item">
+      <span>💡</span>
+      Participated in <strong>Smart India Hackathon (SIH)</strong>, contributing to multiple solution tracks.
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-title">Get In Touch</div>
+  <div class="section-line"></div>
+  <div class="contact-links">
+    <a href="mailto:its.riiii.here@gmail.com" class="contact-link">📧 its.riiii.here@gmail.com</a>
+    <a href="tel:+916383099169" class="contact-link">📞 +91 63830 99169</a>
+    <a href="https://www.linkedin.com/in/rithanya-balasubramani-7150952a5" target="_blank" class="contact-link">💼 LinkedIn</a>
+    <a href="https://github.com/Rithanyab" target="_blank" class="contact-link">🐙 GitHub</a>
+  </div>
+  <div class="contact-form">
+    <input type="text" placeholder="Your Name" />
+    <input type="email" placeholder="Your Email" />
+    <textarea placeholder="Your Message"></textarea>
+    <button class="btn btn-primary" style="width:fit-content" onclick="alert('Thanks for reaching out! I\'ll get back to you soon.')">Send Message</button>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & Built by <strong>Rithanya Balasubramani</strong> · 2025</p>
+</footer>
+
+</body>
+</html>
